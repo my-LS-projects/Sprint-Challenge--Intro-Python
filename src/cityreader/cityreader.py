@@ -10,7 +10,7 @@ class City:
         self.lon = lon
 
     def __str__(self):
-        print(f"{self.name}, {self.lat}, {self.lon}")
+        return f"{self.name}, {self.lat}, {self.lon}"
 
 
 # We have a collection of US cities with population over 750,000 stored in the
@@ -32,6 +32,12 @@ def cityreader(cities=[]):
     # TODO Implement the functionality to read from the 'cities.csv' file
     # For each city record, create a new City instance and add it to the
     # `cities` list
+    # line[0] = name, line[3] = lat, line[4] = lon
+    with open("cities.csv") as csvfile:
+        file = csv.reader(csvfile)
+        header = next(file)
+        for line in file:
+            cities.append(City(line[0], float(line[3]), float(line[4])))
 
     return cities
 
